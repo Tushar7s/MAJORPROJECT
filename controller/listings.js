@@ -4,7 +4,10 @@ module.exports.index = async (req, res) => {
     const allListing = await Listing.find({});
     res.render("index.ejs", { allListing });
 }
-
+module.exports.search = (req, res) => {
+    const searchTerm = req.body.search;
+    res.send(`you searched for ${searchTerm}`);
+}
 module.exports.renderNewForm = (req, res) => {
     res.render("new.ejs");
 }

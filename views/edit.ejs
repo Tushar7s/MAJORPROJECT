@@ -60,9 +60,11 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <select name="listing[category]" class="form-label" id="category">
+                    <select name="listing[category]" <div class="invalid-feedback">
+                        category should be valid!
+                    </div> id="category">
                         <option value="mountains">Mountains</option>
-                        <option value="trending">Trending</option>
+                        <option value="trending" selected>Trending</option>
                         <option value="rooms">Rooms</option>
                         <option value="castles">Castles</option>
                         <option value="iconic">Iconic</option>
