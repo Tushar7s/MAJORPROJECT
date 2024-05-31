@@ -130,3 +130,8 @@ body{
     display: flex;
     align-items: center;
   }
+
+  .listingCategory{
+    text-decoration: none;
+    display: inline-block;
+  }
