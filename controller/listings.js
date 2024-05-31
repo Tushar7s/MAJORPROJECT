@@ -10,7 +10,6 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.showCategory = async(req, res) => {
-    let{id} = req.params;
     const categoryName = req.params.categoryName;
     const allListing = await Listing.find({});
     const requiredListings = allListing.filter(listing => listing.category === categoryName);
@@ -51,7 +50,7 @@ module.exports.renderEditForm = async (req, res) => {
         res.redirect("/listings");
     }
     let originalImageUrl = listing.image.url;
-    originalImageUrl.replace("/upload", "/upload/w_50");
+    // originalImageUrl.replace("/upload", "/upload/w_50");
     res.render("edit.ejs", { listing, originalImageUrl });
 }
 
