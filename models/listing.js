@@ -18,6 +18,7 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Review",
     }],
+    category: String,
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
