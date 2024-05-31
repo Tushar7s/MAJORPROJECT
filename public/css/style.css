@@ -102,7 +102,7 @@ body{
 
 #filters{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
   }
   .filter{
