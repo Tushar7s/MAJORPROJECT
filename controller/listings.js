@@ -12,7 +12,7 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.showCategory = async(req, res) => {
     const categoryName = req.params.categoryName;
     const allListing = await Listing.find({ category: categoryName });
-        res.render("showOnly.ejs", { allListing});
+        res.render("showOnly.ejs", { allListing, categoryName});
 }
 
 module.exports.showListing = async (req, res) => {
