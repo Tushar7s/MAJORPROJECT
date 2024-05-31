@@ -13,7 +13,7 @@ module.exports.showCategory = async(req, res) => {
     const categoryName = req.params.categoryName;
     const allListing = await Listing.find({});
     const requiredListings = allListing.filter(listing => listing.category === categoryName);
-    res.render("showOnly.ejs", { allListing: requiredListings, categoryName });
+    res.render("showOnly.ejs", { requiredListings, categoryName });
 }
 
 module.exports.showListing = async (req, res) => {
