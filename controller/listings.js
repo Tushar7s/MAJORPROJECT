@@ -4,9 +4,11 @@ module.exports.index = async (req, res) => {
     const allListing = await Listing.find({});
     res.render("index.ejs", { allListing });
 }
-module.exports.search = (req, res) => {
+module.exports.search = async (req, res) => {
     const searchTerm = req.body.search;
-    res.send(`you searched for ${searchTerm}`);
+    const allListing = await Listing.find({});
+    const searchedListings = allListing.filter(listing => listing.country.toUpperCase() === searchTerm.toUpperCase());
+    res.render("showDest.ejs", {searchedListings, searchTerm});
 }
 module.exports.renderNewForm = (req, res) => {
     res.render("new.ejs");
