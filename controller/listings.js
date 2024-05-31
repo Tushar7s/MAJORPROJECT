@@ -5,11 +5,6 @@ module.exports.index = async (req, res) => {
     res.render("index.ejs", { allListing });
 }
 module.exports.search = async (req, res) => {
-    // const searchTerm = req.body.search;
-    // const allListing = await Listing.find({});
-    // const searchedListings = allListing.filter(listing => listing.location.toUpperCase() === searchTerm.toUpperCase());
-    // res.render("showDest.ejs", {searchedListings, searchTerm});
-
     const searchTerm = req.body.search;
     const allListing = await Listing.find({});
     const searchedListings = allListing.filter(listing => {

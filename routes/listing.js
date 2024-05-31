@@ -10,22 +10,24 @@ const multer = require("multer");
 const {storage} = require("../cloudconfig.js");
 const upload = multer({storage }) // kis folder main upload karna hai
 
-
+router.route("/", (req, res) => {
+    res.render("home.ejs");
+})
 router.
-    route("/")
+    route("/listings")
         .get(wrapAsync(listingController.index))
         .post(isLoggedIn,  upload.single('listing[image]'), validateListing, wrapAsync(listingController.createListing));
          
 
-    router.get("/new", isLoggedIn, (listingController.renderNewForm));
-router.post("/search", (listingController.search));
+    router.get("/listings/new", isLoggedIn, (listingController.renderNewForm));
+router.post("/listings/search", (listingController.search));
     router.get("/category/:categoryName", isLoggedIn, (listingController.showCategory));
 
-router.route("/:id")
+router.route("/listings/:id")
 .get(wrapAsync(listingController.showListing))
 .put( isLoggedIn, isOwner, upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing));
 
-router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
-router.delete("/:id/delete", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
+router.get("/listings/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
+router.delete("listings/:id/delete", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 
 module.exports = router;
