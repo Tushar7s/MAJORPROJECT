@@ -10,10 +10,11 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.showCategory = async(req, res) => {
+    let{id} = req.params;
     const categoryName = req.params.categoryName;
     const allListing = await Listing.find({});
     const requiredListings = allListing.filter(listing => listing.category === categoryName);
-    res.render("showOnly.ejs", { requiredListings, categoryName });
+    res.render("showOnly.ejs", { requiredListings, categoryName, id });
 }
 
 module.exports.showListing = async (req, res) => {

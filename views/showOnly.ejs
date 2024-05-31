@@ -1,5 +1,8 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <h1><%=categoryName%></h1>
+<% for(let i of id) { %>
+  <h1><%=i%></h1>
+  <%}%>
 <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
     <% for(let listing of requiredListings) { %>
     <a class="listinglink" href="/listings/<%= listing._id %>">
