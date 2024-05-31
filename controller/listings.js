@@ -10,9 +10,8 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.showCategory = async(req, res) => {
-    const allListing = await Listing.find({});
-    const mountainListings = allListing.filter(listing => listing.category === "mountain");
-    res.render("showOnly.ejs", { allListing: mountainListings });
+    const allListing = await Listing.find({ category: categoryName });
+        res.render("showOnly.ejs", { allListing});
 }
 
 module.exports.showListing = async (req, res) => {
