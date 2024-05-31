@@ -18,7 +18,7 @@ module.exports.search = async (req, res) => {
         const matchingChars = getMatchingCharacterCount(location, search);
         return matchingChars >= 3;
     });
-    res.render("searchResults.ejs", { searchedListings, searchTerm });
+    res.render("showDest.ejs", { searchedListings, searchTerm });
 }
 module.exports.renderNewForm = (req, res) => {
     res.render("new.ejs");
