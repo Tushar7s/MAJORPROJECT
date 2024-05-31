@@ -9,6 +9,8 @@ const listing = require("../models/listing.js");
 const multer = require("multer");
 const {storage} = require("../cloudconfig.js");
 const upload = multer({storage }) // kis folder main upload karna hai
+
+
 router.
     route("/")
         .get(wrapAsync(listingController.index))
@@ -24,6 +26,6 @@ router.route("/:id")
 .put( isLoggedIn, isOwner, upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing));
 
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
-router.delete("listings/:id/delete", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
+router.delete("/:id/delete", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 
 module.exports = router;
