@@ -9,6 +9,11 @@ module.exports.renderNewForm = (req, res) => {
     res.render("new.ejs");
 }
 
+module.exports.showCategory = async(req, res) => {
+    const allListing = await Listing.find({});
+    res.render("showOnly.ejs", {allListing});
+}
+
 module.exports.showListing = async (req, res) => {
     const { id } = req.params;
     const destination = await Listing.findById(id).populate({path: "reviews", populate:{
