@@ -43,11 +43,11 @@
     function toggleDarkMode() {
       const isDarkMode = document.body.hasAttribute('data-bs-theme');
       if (isDarkMode) {
-        document.body.removeAttribute('data-bs-theme');
-        localStorage.setItem('darkMode', 'disabled');
-      } else {
         document.body.setAttribute('data-bs-theme', 'dark');
         localStorage.setItem('darkMode', 'enabled');
+      } else {
+        document.body.removeAttribute('data-bs-theme');
+        localStorage.setItem('darkMode', 'disabled');
       }
     }
 
@@ -62,6 +62,7 @@
 
       // Add event listener to toggle button
       darkModeToggle.addEventListener('click', toggleDarkMode);
+      
     });
   </script>
   
