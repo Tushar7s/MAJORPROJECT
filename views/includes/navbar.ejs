@@ -59,7 +59,7 @@
       if (localStorage.getItem('darkMode') === 'enabled') {
         document.body.setAttribute('data-bs-theme', 'dark');
       }else{
-        document.body.setAttribute('data-bs-theme');
+        document.body.removeAttribute('data-bs-theme');
       }
 
       // Add event listener to toggle button
