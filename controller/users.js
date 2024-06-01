@@ -8,8 +8,9 @@ module.exports.verify = async(req, res) => {
 }
 module.exports.check = async(req, res) => {
     let {otp} = req.body;
-    res.send(otp);
+    res.render("users/check.ejs", { otp });
 }
+
 module.exports.signup = async (req, res) => {
     try{
         let{username, email, password} = req.body;
