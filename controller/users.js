@@ -6,6 +6,10 @@ module.exports.renderSignupForm = (req, res) => {
 module.exports.verify = async(req, res) => {
     res.render("users/verify.ejs");
 }
+module.exports.check = async(req, res) => {
+    let {otp} = req.body;
+    res.send(otp);
+}
 module.exports.signup = async (req, res) => {
     try{
         let{username, email, password} = req.body;
