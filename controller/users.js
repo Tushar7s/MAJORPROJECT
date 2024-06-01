@@ -71,14 +71,19 @@ module.exports.check = async(req, res) => {
     if (parseInt(otp) === sessionOtp) {
         // OTP is correct, finalize user registration
         const newUser = new User({ email, username });
-        await User.register(newUser, password);
+        const registeredUser = await User.register(newUser, password);
         delete req.session.otp; // Clear OTP from session
         delete req.session.email; // Clear email from session
         delete req.session.username; // Clear username from session
         delete req.session.password; // Clear password from session
-
-        req.flash("success", "Welcome to WanderLust");
-        res.redirect("/listings");
+       
+        req.login(registeredUser, (err)=> {
+            if(err){
+                return next(err);
+            }
+            req.flash("success", "Welcome to WanderLust");
+            res.redirect("/listings");
+        })
     } else {
         req.flash("error", "Incorrect OTP");
         res.redirect("/verify");
@@ -108,3 +113,4 @@ module.exports.logout = (req, res, next) => {
         }
     });
 }
+        
