@@ -16,7 +16,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-
+const nodeMailer = require("nodemailer");
 
 app.use(express.static(path.join(__dirname, 'public')));//styling apply karne k liye use hota hai ye nhi to styling apply nahi hogi
 
