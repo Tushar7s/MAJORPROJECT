@@ -117,10 +117,20 @@ body {
   
 
   /* Filters */
+  #filters {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+  }
+  /* Optional: Hide scrollbar for a cleaner look */
+#filters::-webkit-scrollbar {
+  display: none;
+}
+
 #filters {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .filter {
