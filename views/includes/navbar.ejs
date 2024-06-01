@@ -40,29 +40,33 @@
     </div>
   </nav>
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    // Function to toggle dark mode
     function toggleDarkMode() {
-      const isDarkMode = document.body.hasAttribute('data-bs-theme');
-      if (isDarkMode) {
-        document.body.removeAttribute('data-bs-theme');
-        localStorage.setItem('darkMode', 'disabled');
-      } else {
-        document.body.setAttribute('data-bs-theme', 'dark');
-        localStorage.setItem('darkMode', 'enabled');
-      }
+        const isDarkMode = document.body.getAttribute('data-bs-theme') === 'dark';
+        if (isDarkMode) {
+            document.body.removeAttribute('data-bs-theme');
+            localStorage.setItem('darkMode', 'disabled');
+        } else {
+            document.body.setAttribute('data-bs-theme', 'dark');
+            localStorage.setItem('darkMode', 'enabled');
+        }
     }
 
-    // Event listener for dark mode toggle button
-    document.addEventListener("DOMContentLoaded", function() {
-      const darkModeToggle = document.getElementById('darkModeToggle');
-
-      // Load dark mode preference from localStorage
-      if (localStorage.getItem('darkMode') === 'enabled') {
+    // Load dark mode preference from localStorage
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
         document.body.setAttribute('data-bs-theme', 'dark');
-      }
+        darkModeToggle.checked = true;
+    }
 
-      // Add event listener to toggle button
-      darkModeToggle.addEventListener('click', toggleDarkMode);
-      
+    // Add event listener to toggle button
+    darkModeToggle.addEventListener('change', function() {
+        toggleDarkMode();
     });
+});
+
   </script>
   
