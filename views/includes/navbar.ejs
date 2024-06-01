@@ -42,7 +42,7 @@
   <script>
   function toggleDarkMode() {
     const isDarkMode = document.body.getAttribute('data-bs-theme') === 'dark';
-      if (isDarkMode) {
+      if (!isDarkMode) {
         document.body.removeAttribute('data-bs-theme');
         localStorage.setItem('darkMode', 'disabled');
       } else {
