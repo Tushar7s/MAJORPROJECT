@@ -22,8 +22,9 @@
           </form>
         </div>
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">Add your home</a>
+          <a class="nav-link" href="/listings/new">Airbnb your place</a>
           <% if(!currUser){%>
+            <button id="darkModeToggle">Dark Mode</button>
             <a class="nav-link" href="/login">LogIn</a>
             <a class="nav-link" href="/signup">SignUp</a>
           <%}%> 
@@ -35,3 +36,16 @@
       </div>
     </div>
   </nav>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  darkModeToggle.addEventListener('click', function() {
+    document.body.toggleAttribute('data-bs-theme');
+    if (document.body.getAttribute('data-bs-theme') === 'dark') {
+      document.body.setAttribute('data-bs-theme', 'dark');
+    } else {
+      document.body.removeAttribute('data-bs-theme');
+    }
+  });
+});
+  </script>
