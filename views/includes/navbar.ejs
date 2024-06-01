@@ -41,13 +41,13 @@
   </nav>
   <script>
   function toggleDarkMode() {
-      const isDarkMode = document.body.hasAttribute('data-bs-theme');
+    const isDarkMode = document.body.getAttribute('data-bs-theme') === 'dark';
       if (isDarkMode) {
         document.body.removeAttribute('data-bs-theme');
-        localStorage.setItem('darkMode', 'enabled');
+        localStorage.setItem('darkMode', 'disabled');
       } else {
         document.body.setAttribute('data-bs-theme', 'dark');
-        localStorage.setItem('darkMode', 'disabled');
+        localStorage.setItem('darkMode', 'enabled');
       }
     }
       const darkModeToggle = document.getElementById('darkModeToggle');
