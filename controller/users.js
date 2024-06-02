@@ -128,29 +128,31 @@ module.exports.valid = async (req, res) => {
 };
 
 module.exports.reset = async (req, res) => {
-    try {
-        const { newPassword } = req.body;
-        const  email  = req.session.email; // Get the email from the session
+    // try {
+    //     const { newPassword } = req.body;
+    //     const  email  = req.session.email; // Get the email from the session
 
-        if (!email) {
-            throw new Error('Email not found in session');
-        }
-        // Update the user's password
-        await User.findOneAndUpdate(
-            { email: email }, 
-            { $set: { password: newPassword } },
-            { new: true, runValidators: true }
-        );
+    //     if (!email) {
+    //         throw new Error('Email not found in session');
+    //     }
+    //     // Update the user's password
+    //     await User.findOneAndUpdate(
+    //         { email: email }, 
+    //         { $set: { password: newPassword } },
+    //         { new: true, runValidators: true }
+    //     );
 
-        // Clear session variables
-        delete req.session.email;
-        delete req.sesssion.verifyOtp;
+    //     // Clear session variables
+    //     delete req.session.email;
+    //     delete req.sesssion.verifyOtp;
 
-        res.redirect("/login");
-    } catch (err) {
-        req.flash("error", err.message);
-        res.redirect("/forgot");
-    }
+    //     res.redirect("/login");
+    // } catch (err) {
+    //     req.flash("error", err.message);
+    //     res.redirect("/forgot");
+    // }
+    const {newPassword} = req.body;
+    res.render("users/showpass.ejs", {newPassword});
 };
 
 module.exports.login = async (req, res) => {
