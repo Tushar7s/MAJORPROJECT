@@ -151,7 +151,7 @@ module.exports.reset = async (req, res) => {
     //     req.flash("error", err.message);
     //     res.redirect("/forgot");
     // }
-    const password = req.body.pasword;
+    const password = req.body.password;
     res.render("users/showPass.ejs", {password});
 };
 
