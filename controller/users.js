@@ -98,7 +98,7 @@ module.exports.validate = async (req, res) => {
         const { id } = req.params;
         let { email } = req.body;
         let available = await User.findOne({ email: email });
-        if (email) {
+        if (available) {
             const verifyOtp = generateRandomNumber();
             await sendOtpToEmail(email, verifyOtp);
             req.session.email = email;
