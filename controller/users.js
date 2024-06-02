@@ -138,7 +138,7 @@ module.exports.reset = async (req, res) => {
         // Update the user's password
         await User.findOneAndUpdate(
             { email: email }, 
-            { $set: { password: password } },
+            {password: password },
             { new: true, runValidators: true }
         );
 
