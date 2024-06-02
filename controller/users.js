@@ -91,11 +91,12 @@ module.exports.renderLoginForm = (req, res) => {
     res.render("users/login.ejs");
 }
 module.exports.forget = async(req, res) => {
-    res.render("forgot.ejs");
+    res.render("users/forgot.ejs");
 }
 module.exports.validate = async(req, res) => {
     try{
         let {email} = req.body();
+        console.log(req.body());
     const verifyOtp = generateRandomNumber();
     await sendOtpToEmail(email, verifyOtp);
     req.session.email = email;
@@ -113,7 +114,7 @@ module.exports.validate = async(req, res) => {
         let {otp} = req.body();
         const{email, verifyOtp} = req.session;
         if(parseInt(otp) == verifyOtp){
-            res.render("reset.ejs");
+            res.render("users/reset.ejs");
         }else{
             req.flash("error", "incorrect otp");
             res.redirect("/verifyLogin");
