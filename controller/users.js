@@ -90,7 +90,7 @@ module.exports.check = async(req, res) => {
 module.exports.renderLoginForm = (req, res) => {
     res.render("users/login.ejs");
 }
-module.exports.forget = async(req, res) => {
+module.exports.forgot = async(req, res) => {
     res.render("users/forgot.ejs");
 }
 module.exports.validate = async(req, res) => {
