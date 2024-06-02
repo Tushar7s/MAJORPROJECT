@@ -135,16 +135,13 @@ module.exports.reset = async (req, res) => {
     try {
         const password = req.body.password;
         const  email  = req.session.email; // Get the email from the session
-
+        const user = await User.findOne({email:email})
         if (!email) {
             throw new Error('Email not found in session');
         }
         // Update the user's password
-        await User.findOneAndUpdate(
-            { email: email }, 
-            {password: password },
-            { new: true, runValidators: true }
-        );
+        await user.setPassword(password);
+        await user.save();
 
         // Clear session variables
         delete req.session.email;
