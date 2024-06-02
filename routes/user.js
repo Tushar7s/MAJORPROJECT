@@ -13,6 +13,7 @@ router.get("/forgot", (userController.forgot));
 router.post("/forgot", (userController.validate));
 router.get("/verifyLogin", (userController.isOtp));
 router.post("/verifyLogin", (userController.valid));
+router.post("/reset", (userController.reset))
 router.route("/signup")
 .get(userController.renderSignupForm)
 .post(wrapAsync(userController.signup));
