@@ -57,11 +57,11 @@ module.exports.signup = async (req, res) => {
     }
 };
 
-module.exports.verify = async(req, res) => {
+module.exports.verify = async (req, res) => {
     res.render("users/verify.ejs");
 }
 
-module.exports.check = async(req, res) => {
+module.exports.check = async (req, res) => {
     let { otp } = req.body;
     const { otp: sessionOtp, email, username, password } = req.session;
 
@@ -73,9 +73,9 @@ module.exports.check = async(req, res) => {
         delete req.session.email; // Clear email from session
         delete req.session.username; // Clear username from session
         delete req.session.password; // Clear password from session
-       
-        req.login(registeredUser, (err)=> {
-            if(err){
+
+        req.login(registeredUser, (err) => {
+            if (err) {
                 return next(err);
             }
             req.flash("success", "Welcome to WanderLust");
@@ -90,36 +90,42 @@ module.exports.check = async(req, res) => {
 module.exports.renderLoginForm = (req, res) => {
     res.render("users/login.ejs");
 }
-module.exports.forgot = async(req, res) => {
+module.exports.forgot = async (req, res) => {
     res.render("users/forgot.ejs");
 }
-module.exports.validate = async(req, res) => {
-    try{
-        let {email} = req.body;
-        console.log(req.body);
-    const verifyOtp = generateRandomNumber();
-    await sendOtpToEmail(email, verifyOtp);
-    req.session.email = email;
-    req.session.verifyOtp = verifyOtp;
-    res.redirect("/verifyLogin");
-    }catch(err){
+module.exports.validate = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let { email } = req.body;
+        let available = await User.findOne({ email: email });
+        if (email) {
+            const verifyOtp = generateRandomNumber();
+            await sendOtpToEmail(email, verifyOtp);
+            req.session.email = email;
+            req.session.verifyOtp = verifyOtp;
+            res.redirect("/verifyLogin");
+        } else {
+            req.flash("error", "User not found");
+            res.redirect("/forgot");
+        }
+    } catch (err) {
         req.flash("error", err.message);
         res.redirect("/login");
     }
 };
-    module.exports.isOtp = async(req, res) => {
-        res.render("users/verifyLogin.ejs");
-    };
-    module.exports.valid = async(req, res) => {
-        let {otp} = req.body;
-        const{email, verifyOtp} = req.session;
-        if(parseInt(otp) == verifyOtp){
-            res.render("users/reset.ejs");
-        }else{
-            req.flash("error", "incorrect otp");
-            res.redirect("/verifyLogin");
-        }
-    };
+module.exports.isOtp = async (req, res) => {
+    res.render("users/verifyLogin.ejs");
+};
+module.exports.valid = async (req, res) => {
+    let { otp } = req.body;
+    const { email, verifyOtp } = req.session;
+    if (parseInt(otp) == verifyOtp) {
+        res.render("users/reset.ejs");
+    } else {
+        req.flash("error", "incorrect otp");
+        res.redirect("/verifyLogin");
+    }
+};
 module.exports.login = async (req, res) => {
     req.flash("success", "Welcome back to WanderLust!!");
     if (res.locals.redirectUrl) {
@@ -139,4 +145,3 @@ module.exports.logout = (req, res, next) => {
         }
     });
 }
-        
