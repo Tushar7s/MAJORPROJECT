@@ -130,7 +130,7 @@ module.exports.valid = async (req, res) => {
 module.exports.reset = async (req, res) => {
     try {
         const { newPassword } = req.body;
-        const { email } = req.session; // Get the email from the session
+        const { email } = req.session.email; // Get the email from the session
 
         if (!email) {
             throw new Error('Email not found in session');
