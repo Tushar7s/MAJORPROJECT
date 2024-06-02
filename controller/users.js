@@ -144,7 +144,7 @@ module.exports.reset = async (req, res) => {
 
         // Clear session variables
         delete req.session.email;
-        delete req.sesssion.verifyOtp;
+        delete req.session.verifyOtp;
 
         res.redirect("/login");
     } catch (err) {
