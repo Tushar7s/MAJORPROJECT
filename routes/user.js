@@ -10,8 +10,8 @@ const user = require("../models/user.js");
 router.get("/verify", (userController.verify));
 router.post("/check", (userController.check));
 router.get("/forgot", (userController.forgot));
-router.post("/forgot", (userContoller.validate))
-router.get("/verifyLogin", (userContoller.isOtp));
+router.post("/forgot", (userController.validate));
+router.get("/verifyLogin", (userController.isOtp));
 router.post("/verifyLogin", (userController.valid));
 router.route("/signup")
 .get(userController.renderSignupForm)
