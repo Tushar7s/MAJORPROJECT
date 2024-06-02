@@ -43,14 +43,18 @@ module.exports.signup = async (req, res) => {
         // Generate OTP and send to email
         const otp = generateRandomNumber();
         await sendOtpToEmail(email, otp);
-
-        // Store email and OTP in session for later verification
+        let registered = await User.findOne({email:email});
+        if(!registered){
         req.session.otp = otp;
         req.session.email = email;
         req.session.username = username;
         req.session.password = password;
 
         res.redirect("/verify");
+        }else{
+            req.flash("error", "E-mail already in use");
+            res.redirect("/signup");
+        }
     } catch (err) {
         req.flash("error", err.message);
         res.redirect("/signup");
