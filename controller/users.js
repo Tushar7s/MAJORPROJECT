@@ -129,7 +129,7 @@ module.exports.valid = async (req, res) => {
 
 module.exports.reset = async (req, res) => {
     try {
-        const { newPassword } = req.body;
+        const { password } = req.body;
         const  email  = req.session.email; // Get the email from the session
 
         if (!email) {
@@ -138,7 +138,7 @@ module.exports.reset = async (req, res) => {
         // Update the user's password
         await User.findOneAndUpdate(
             { email: email }, 
-            { $set: { password: newPassword } },
+            { $set: { password: password } },
             { new: true, runValidators: true }
         );
 
