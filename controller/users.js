@@ -95,8 +95,8 @@ module.exports.forgot = async(req, res) => {
 }
 module.exports.validate = async(req, res) => {
     try{
-        let {email} = req.body();
-        console.log(req.body());
+        let {email} = req.body;
+        console.log(req.body);
     const verifyOtp = generateRandomNumber();
     await sendOtpToEmail(email, verifyOtp);
     req.session.email = email;
@@ -111,7 +111,7 @@ module.exports.validate = async(req, res) => {
         res.render("users/verifyLogin.ejs");
     };
     module.exports.valid = async(req, res) => {
-        let {otp} = req.body();
+        let {otp} = req.body;
         const{email, verifyOtp} = req.session;
         if(parseInt(otp) == verifyOtp){
             res.render("users/reset.ejs");
