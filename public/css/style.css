@@ -253,6 +253,14 @@ body {
   .navbar a{
     color: white !important;
   }
+  .f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
 }
 
 /* Your other CSS rules */
