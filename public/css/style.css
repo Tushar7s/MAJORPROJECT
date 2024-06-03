@@ -254,7 +254,7 @@ body {
     color: white !important;
   }
   .footer {
-    background-color: black;
+    background-color: black !important;
   }
   
   .f-info-links, .f-info-socials, .f-info-brand {
@@ -263,7 +263,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: white !important;
   }
   
 }
