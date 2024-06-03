@@ -60,7 +60,7 @@ module.exports.final = async (req, res) => {
     try {
         let { otp } = req.body;
         let { verifyOtp, email } = req.session;
-        if (otp === verifyOtp) {
+        if (parseInt(otp) === verifyOtp) {
             await User.findOneAndDelete({ email: email });
             delete req.session.email;
             delete req.session.verifyOtp;
