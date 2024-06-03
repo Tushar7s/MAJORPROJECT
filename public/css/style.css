@@ -253,6 +253,10 @@ body {
   .navbar a{
     color: white !important;
   }
+  footer {
+    background-color: black;
+  }
+  
   .f-info-links, .f-info-socials, .f-info-brand {
     width: 100%;
     vertical-align: middle;
@@ -261,6 +265,7 @@ body {
     justify-content: center;
     color: white;
   }
+  
 }
 
 /* Your other CSS rules */
