@@ -13,6 +13,9 @@ router.get("/forgot", (userController.forgot));
 router.post("/forgot", (userController.validate));
 router.get("/verifyLogin", (userController.isOtp));
 router.post("/verifyLogin", (userController.valid));
+router.get("/deleteUser", (userController.renderDeleteUser));
+router.post("/deleteUser", (userController.match));
+router.post("/verifyUser", (userController.final));
 router.post("/reset", (userController.reset))
 router.route("/signup")
 .get(userController.renderSignupForm)

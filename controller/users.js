@@ -31,7 +31,51 @@ async function sendOtpToEmail(email, otp) {
         throw error; // Throw an error if email sending fails
     }
 }
+module.exports.renderDeleteUser = (req, res) => {
+    render("users/deleteUser.ejs");
+}
 
+module.exports.match = async (req, res) => {
+    try {
+        let { email } = req.body;
+        let verifyOtp = generateRandomNumber();
+        let registered = await findOne({ email: email });
+        if (registered) {
+            sendOtpToEmail(email, verifyOtp);
+            req.session.email = email;
+            req.session.verifyOtp = verifyOtp;
+            res.render("users/verifyUser.ejs");
+        } else {
+            req.flash("error", "Invalid Email");
+            res.redirect("/deleteUser");
+        }
+    } catch (err) {
+        req.flash("error", err.message);
+        res.redirect("/listings");
+    }
+
+}
+
+module.exports.final = async (req, res) => {
+    try {
+        let { otp } = req.body;
+        let { verifyOtp, email } = req.session;
+        if (otp === verifyOtp) {
+            await User.findOneAndDelete({ email: email });
+            delete req.session.email;
+            delete req.session.verifyOtp;
+            req.flash("success", "User deleted succesfully");
+            res.redirect("/logout");
+        } else {
+            req.flash("error", "Incorrect Otp");
+            res.redirect("/verifyUser");
+        }
+    } catch (err) {
+        req.flash("error", err.message);
+        res.redirect("/listings");
+    }
+
+}
 module.exports.renderSignupForm = (req, res) => {
     res.render("users/signup.ejs");
 }
@@ -43,15 +87,15 @@ module.exports.signup = async (req, res) => {
         // Generate OTP and send to email
         const otp = generateRandomNumber();
         await sendOtpToEmail(email, otp);
-        let registered = await User.findOne({email:email});
-        if(!registered){
-        req.session.otp = otp;
-        req.session.email = email;
-        req.session.username = username;
-        req.session.password = password;
+        let registered = await User.findOne({ email: email });
+        if (!registered) {
+            req.session.otp = otp;
+            req.session.email = email;
+            req.session.username = username;
+            req.session.password = password;
 
-        res.redirect("/verify");
-        }else{
+            res.redirect("/verify");
+        } else {
             req.flash("error", "E-mail already in use");
             res.redirect("/signup");
         }
@@ -134,8 +178,8 @@ module.exports.valid = async (req, res) => {
 module.exports.reset = async (req, res) => {
     try {
         const password = req.body.password;
-        const  email  = req.session.email; // Get the email from the session
-        const user = await User.findOne({email:email})
+        const email = req.session.email; // Get the email from the session
+        const user = await User.findOne({ email: email })
         if (!email) {
             throw new Error('Email not found in session');
         }
