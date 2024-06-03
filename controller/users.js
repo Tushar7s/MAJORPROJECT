@@ -32,7 +32,7 @@ async function sendOtpToEmail(email, otp) {
     }
 }
 module.exports.renderDeleteUser = (req, res) => {
-    render("users/deleteUser.ejs");
+    res.render("users/deleteUser.ejs");
 }
 
 module.exports.match = async (req, res) => {
