@@ -250,6 +250,9 @@ body {
     background-color: #212529;
     color: white;
   }
+  .navbar a{
+    color: white !important;
+  }
 }
 
 /* Your other CSS rules */
