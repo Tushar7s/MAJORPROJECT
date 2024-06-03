@@ -39,7 +39,7 @@ module.exports.match = async (req, res) => {
     try {
         let { email } = req.body;
         let verifyOtp = generateRandomNumber();
-        let registered = await findOne({ email: email });
+        let registered = await User.findOne({ email: email });
         if (registered) {
             sendOtpToEmail(email, verifyOtp);
             req.session.email = email;
