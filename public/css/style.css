@@ -247,7 +247,8 @@ body {
   --bs-form-invalid-border-color: #ea868f;
   .navbar {
     height: 5rem;
-    background-color: black;
+    background-color: #212529;
+    color: white;
   }
 }
 
