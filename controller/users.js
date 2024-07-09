@@ -65,7 +65,7 @@ module.exports.final = async (req, res) => {
             delete req.session.email;
             delete req.session.verifyOtp;
             req.flash("success", "User deleted succesfully");
-            res.render("prompt.ejs");
+            res.redirect("/logout");
         } else {
             req.flash("error", "Incorrect Otp");
             res.redirect("/verifyUser");
