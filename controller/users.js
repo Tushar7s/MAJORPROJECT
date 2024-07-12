@@ -1,5 +1,8 @@
 const nodemailer = require('nodemailer');
 const User = require("../models/user.js");
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
 
 // Function to generate a 6-digit random number
 function generateRandomNumber() {
@@ -11,13 +14,13 @@ async function sendOtpToEmail(email, otp) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'patidartushar78@gmail.com', // Your Gmail email address
-            pass: 'yght krkp hdwc fslq' // Your Gmail password or application-specific password
+            user: process.env.EMAIL2, // Your Gmail email address
+            pass: process.env.PASS2 // Your Gmail password or application-specific password
         }
     });
 
     const mailOptions = {
-        from: '22bit076@ietdavv.edu.in', // Sender address
+        from: process.env.EMAIL1, // Sender address
         to: email, // Recipient address
         subject: 'Your OTP for verification', // Subject line
         text: `Your OTP is: ${otp}` // Plain text body
