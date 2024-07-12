@@ -3,8 +3,6 @@ const User = require("../models/user.js");
 if(process.env.NODE_ENV !== "production"){
     require('dotenv').config();
 }
-console.log("EMAIL1" + process.env.EMAIL1);
-console.log(process.env.EMAIL2);
 // Function to generate a 6-digit random number
 function generateRandomNumber() {
     return Math.floor(100000 + Math.random() * 900000);
